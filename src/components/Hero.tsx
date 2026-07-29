@@ -156,12 +156,12 @@ export default function Hero() {
               Call Alex (502) 910-5976
             </motion.a>
             <motion.a
-              href="tel:+15026745581"
+              href="tel:+15026748851"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
               className="rounded-full border border-stone-500/60 px-6 py-3.5 font-display text-base font-bold text-stone-200 transition-colors hover:border-gold-500 hover:text-gold-400"
             >
-              Call Tony (502) 674-5581
+              Call Tony (502) 674-8851
             </motion.a>
           </div>
 

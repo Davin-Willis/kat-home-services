@@ -75,14 +75,14 @@ export default function ServiceArea() {
               </motion.a>
 
               <motion.a
-                href="tel:+15026745581"
+                href="tel:+15026748851"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.97 }}
                 className="flex items-center justify-between gap-3 rounded-2xl bg-gold-500 px-6 py-4 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
               >
                 <span className="flex items-center gap-3 font-display text-lg font-bold text-navy-950">
                   <PhoneIcon />
-                  (502) 674-5581
+                  (502) 674-8851
                 </span>
                 <span className="text-xs font-bold tracking-[0.14em] text-navy-800 uppercase">
                   Tony

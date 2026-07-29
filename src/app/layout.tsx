@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kathomeservices.com"),
   title: "KAT Home Services, LLC | Home Repair & Remodeling in Louisville, KY",
   description:
-    "Fully insured home repair and remodeling in Louisville, KY. Bathrooms, kitchens, flooring, tile, trim, and more. Call or text Alex (502) 910-5976 or Tony (502) 674-5581 for a free estimate.",
+    "Fully insured home repair and remodeling in Louisville, KY. Bathrooms, kitchens, flooring, tile, trim, and more. Call or text Alex (502) 910-5976 or Tony (502) 674-8851 for a free estimate.",
   openGraph: {
     title: "KAT Home Services, LLC",
     description:

@@ -17,7 +17,7 @@ export default function Footer() {
         <p className="text-sm leading-relaxed text-stone-400">
           KAT Home Services, LLC · Fully insured · Louisville, KY
           <br />
-          Alex (502) 910-5976 · Tony (502) 674-5581 ·{" "}
+          Alex (502) 910-5976 · Tony (502) 674-8851 ·{" "}
           <a
             href="mailto:Info@KATHomeServices.com"
             className="transition-colors hover:text-gold-500"

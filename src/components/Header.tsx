@@ -37,6 +37,7 @@ function PhoneIcon() {
 export default function Header() {
   const { scrollY } = useScroll();
   const [scrolled, setScrolled] = useState(false);
+  const [callMenuOpen, setCallMenuOpen] = useState(false);
 
   // Fires whenever scrollY changes — cheaper than a window scroll listener
   // because Framer Motion batches reads outside React renders.
@@ -81,14 +82,60 @@ export default function Header() {
         </nav>
 
         <div className="flex items-center gap-3">
-          {/* Mobile: one-tap call shortcut, since the nav links are hidden */}
-          <a
-            href="tel:+15029105976"
-            aria-label="Call Alex at (502) 910-5976"
-            className="flex h-10 w-10 items-center justify-center rounded-full border border-gold-500/60 text-gold-500 transition-colors hover:border-gold-400 hover:text-gold-400 md:hidden"
-          >
-            <PhoneIcon />
-          </a>
+          {/* Mobile: call shortcut, since the nav links are hidden. Opens a
+              two-choice menu so either owner is one tap away. */}
+          <div className="relative md:hidden">
+            <button
+              type="button"
+              onClick={() => setCallMenuOpen((open) => !open)}
+              aria-label="Call Alex or Tony"
+              aria-haspopup="true"
+              aria-expanded={callMenuOpen}
+              className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
+                callMenuOpen
+                  ? "border-gold-400 bg-gold-500/10 text-gold-400"
+                  : "border-gold-500/60 text-gold-500 hover:border-gold-400 hover:text-gold-400"
+              }`}
+            >
+              <PhoneIcon />
+            </button>
+            {callMenuOpen && (
+              <>
+                {/* Click-away backdrop */}
+                <div
+                  className="fixed inset-0"
+                  onClick={() => setCallMenuOpen(false)}
+                  aria-hidden="true"
+                />
+                <div className="fixed top-20 right-4 z-10 w-60 overflow-hidden rounded-xl border border-stone-600/40 bg-navy-950/95 shadow-xl shadow-navy-950/50 backdrop-blur-md">
+                  <a
+                    href="tel:+15029105976"
+                    onClick={() => setCallMenuOpen(false)}
+                    className="block px-4 py-3.5 transition-colors hover:bg-navy-800"
+                  >
+                    <span className="block font-display text-sm font-bold text-white">
+                      Call Alex
+                    </span>
+                    <span className="block text-sm text-stone-300">
+                      (502) 910-5976
+                    </span>
+                  </a>
+                  <a
+                    href="tel:+15026748851"
+                    onClick={() => setCallMenuOpen(false)}
+                    className="block border-t border-stone-600/30 px-4 py-3.5 transition-colors hover:bg-navy-800"
+                  >
+                    <span className="block font-display text-sm font-bold text-white">
+                      Call Tony
+                    </span>
+                    <span className="block text-sm text-stone-300">
+                      (502) 674-8851
+                    </span>
+                  </a>
+                </div>
+              </>
+            )}
+          </div>
           <motion.a
             href="#contact"
             whileHover={{ scale: 1.04 }}
