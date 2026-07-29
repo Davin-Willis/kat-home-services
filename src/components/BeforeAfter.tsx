@@ -213,7 +213,7 @@ export default function BeforeAfter() {
           eyebrow="Before & after"
           title="Real jobs,"
           titleMuted="start to finish."
-          intro="No stock photos here. This is our work. Tap any photo for a closer look, and ask us for references if you want to talk to the homeowners."
+          intro="No stock photos here. This is our work. Tap any photo for a closer look, and ask us any questions you may have."
         />
 
         <div className="mt-16 space-y-6">
