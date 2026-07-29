@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/asset";
 import Lightbox, { ExpandIcon, type LightboxImage } from "./Lightbox";
 import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
@@ -121,7 +122,7 @@ export default function RecentWork() {
                       className="group/photo relative block cursor-zoom-in"
                     >
                       <Image
-                        src={image.src}
+                        src={asset(image.src)}
                         alt={image.alt}
                         width={480}
                         height={600}

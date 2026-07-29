@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { asset } from "@/lib/asset";
 import Lightbox, { ExpandIcon, type LightboxImage } from "./Lightbox";
 import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
@@ -101,7 +102,7 @@ export default function Services() {
                   className="group/photo relative block w-full cursor-zoom-in overflow-hidden"
                 >
                   <Image
-                    src={service.image}
+                    src={asset(service.image)}
                     alt={service.alt}
                     width={640}
                     height={400}

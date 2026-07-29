@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { asset } from "@/lib/asset";
 import SawEdge from "./SawEdge";
 
 export default function Footer() {
@@ -7,7 +8,7 @@ export default function Footer() {
       <SawEdge fill="var(--color-navy-950)" className="absolute inset-x-0 -top-4" />
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 text-center sm:px-8">
         <Image
-          src="/images/kat-logo.png"
+          src={asset("/images/kat-logo.png")}
           alt="KAT Home Services bobcat logo"
           width={96}
           height={90}

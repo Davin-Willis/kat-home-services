@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion } from "framer-motion";
+import { asset } from "@/lib/asset";
 import { EASE } from "./Reveal";
 
 export type LightboxImage = {
@@ -85,7 +86,7 @@ export default function Lightbox({
             className="flex max-h-full flex-col items-center"
           >
             <Image
-              src={image.src}
+              src={asset(image.src)}
               alt={image.alt}
               width={1600}
               height={1200}

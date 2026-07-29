@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { asset } from "@/lib/asset";
 
 const TRUST_BADGES = ["Fully insured", "Free estimates", "Louisville owned"];
 
@@ -87,7 +88,7 @@ export default function Hero() {
           {/* Mobile: logo front and center above the headline */}
           <div className="mb-8 flex justify-center md:hidden">
             <Image
-              src="/images/kat-logo.png"
+              src={asset("/images/kat-logo.png")}
               alt="KAT Home Services bobcat logo"
               width={176}
               height={165}
@@ -122,7 +123,7 @@ export default function Hero() {
           className="hidden shrink-0 md:block"
         >
           <Image
-            src="/images/kat-logo.png"
+            src={asset("/images/kat-logo.png")}
             alt="KAT Home Services bobcat logo"
             width={340}
             height={319}
@@ -195,7 +196,7 @@ export default function Hero() {
             </p>
             <div className="mt-4 overflow-hidden rounded-xl">
               <Image
-                src="/images/kitchen-after.jpg"
+                src={asset("/images/kitchen-after.jpg")}
                 alt="Finished open-concept kitchen with exposed wood beam and pass-through counter"
                 width={640}
                 height={480}

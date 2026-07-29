@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { asset } from "@/lib/asset";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
@@ -54,7 +55,7 @@ export default function Header() {
       <div className="mx-auto flex h-18 max-w-6xl items-center justify-between gap-3 px-5 sm:px-8">
         <a href="#top" className="flex items-center gap-3">
           <Image
-            src="/images/kat-logo.png"
+            src={asset("/images/kat-logo.png")}
             alt=""
             width={44}
             height={41}
