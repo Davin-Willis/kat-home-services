@@ -7,8 +7,7 @@ import { asset } from "@/lib/asset";
 
 const NAV_LINKS = [
   { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Our Work", href: "#work" },
+  { label: "Before & After", href: "#work" },
   { label: "Contact", href: "#contact" },
 ];
 
@@ -88,7 +87,7 @@ export default function Header() {
             <button
               type="button"
               onClick={() => setCallMenuOpen((open) => !open)}
-              aria-label="Call Alex or Tony"
+              aria-label="Call Tony or Alex"
               aria-haspopup="true"
               aria-expanded={callMenuOpen}
               className={`flex h-10 w-10 items-center justify-center rounded-full border transition-colors ${
@@ -109,27 +108,27 @@ export default function Header() {
                 />
                 <div className="fixed top-20 right-4 z-10 w-60 overflow-hidden rounded-xl border border-stone-600/40 bg-navy-950/95 shadow-xl shadow-navy-950/50 backdrop-blur-md">
                   <a
-                    href="tel:+15029105976"
-                    onClick={() => setCallMenuOpen(false)}
-                    className="block px-4 py-3.5 transition-colors hover:bg-navy-800"
-                  >
-                    <span className="block font-display text-sm font-bold text-white">
-                      Call Alex
-                    </span>
-                    <span className="block text-sm text-stone-300">
-                      (502) 910-5976
-                    </span>
-                  </a>
-                  <a
                     href="tel:+15026748851"
                     onClick={() => setCallMenuOpen(false)}
-                    className="block border-t border-stone-600/30 px-4 py-3.5 transition-colors hover:bg-navy-800"
+                    className="block px-4 py-3.5 transition-colors hover:bg-navy-800"
                   >
                     <span className="block font-display text-sm font-bold text-white">
                       Call Tony
                     </span>
                     <span className="block text-sm text-stone-300">
                       (502) 674-8851
+                    </span>
+                  </a>
+                  <a
+                    href="tel:+15029105976"
+                    onClick={() => setCallMenuOpen(false)}
+                    className="block border-t border-stone-600/30 px-4 py-3.5 transition-colors hover:bg-navy-800"
+                  >
+                    <span className="block font-display text-sm font-bold text-white">
+                      Call Alex
+                    </span>
+                    <span className="block text-sm text-stone-300">
+                      (502) 910-5976
                     </span>
                   </a>
                 </div>

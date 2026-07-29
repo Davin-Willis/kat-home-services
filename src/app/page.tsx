@@ -3,8 +3,7 @@ import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Services from "@/components/Services";
 import Marquee from "@/components/Marquee";
-import Process from "@/components/Process";
-import RecentWork from "@/components/RecentWork";
+import BeforeAfter from "@/components/BeforeAfter";
 import ServiceArea from "@/components/ServiceArea";
 import Footer from "@/components/Footer";
 
@@ -20,8 +19,7 @@ export default function Home() {
         <Hero />
         <Services />
         <Marquee />
-        <Process />
-        <RecentWork />
+        <BeforeAfter />
         <ServiceArea />
       </main>
       <Footer />

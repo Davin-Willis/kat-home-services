@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { asset } from "@/lib/asset";
 
-const TRUST_BADGES = ["Fully insured", "Free estimates", "Louisville owned"];
+const TRUST_BADGES = ["Fully insured", "Free estimates", "Bardstown based"];
 
 function CheckIcon() {
   return (
@@ -53,7 +53,7 @@ export default function Hero() {
       id="top"
       className="relative isolate flex min-h-screen flex-col justify-between overflow-hidden bg-navy-900 px-5 pt-28 pb-14 sm:px-10 sm:pt-36"
     >
-      {/* Slow-drifting glow blobs — navy depth + a warm gold cast */}
+      {/* Slow-drifting glow blobs — deep warmth + a gold cast */}
       <motion.div
         aria-hidden="true"
         animate={{ x: [0, 60, -30, 0], y: [0, -40, 30, 0] }}
@@ -98,7 +98,7 @@ export default function Hero() {
           </div>
 
           <p className="mb-8 font-display text-sm font-bold tracking-[0.14em] text-gold-500 uppercase">
-            Home repair &amp; remodeling · Louisville, KY
+            Home repair &amp; remodeling · Bardstown, KY
           </p>
 
           <h1 className="font-display font-bold tracking-tight text-white">
@@ -133,20 +133,28 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Bottom band: copy + CTAs bottom-left, featured project bottom-right */}
+      {/* Bottom band: the pitch, the phones, and the trust badges */}
       <motion.div
         style={prefersReduced ? undefined : { y: bottomY, opacity: fade }}
-        className="mt-16 flex flex-wrap items-end justify-between gap-x-16 gap-y-10"
+        className="mt-16"
       >
-        <div className="max-w-md">
+        <div className="max-w-xl">
           <p className="text-lg leading-relaxed text-stone-300">
-            KAT Home Services is Alex and Tony, a Louisville crew that handles
-            bathrooms, kitchens, flooring, trim, and the rest of the list.
-            Clean work at a fair price, from owners who answer their own
-            phones.
+            KAT Home Services is Tony and Alex, a Bardstown crew that handles
+            the whole list: handyman work, remodels, demolition and cleanup,
+            inside the house and out. Clean work at a fair price, from owners
+            who answer their own phones.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-4">
+            <motion.a
+              href="tel:+15026748851"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-full bg-gold-500 px-6 py-3.5 font-display text-base font-bold text-navy-950 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
+            >
+              Call Tony (502) 674-8851
+            </motion.a>
             <motion.a
               href="tel:+15029105976"
               whileHover={{ scale: 1.04, y: -2 }}
@@ -154,14 +162,6 @@ export default function Hero() {
               className="rounded-full bg-gold-500 px-6 py-3.5 font-display text-base font-bold text-navy-950 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
             >
               Call Alex (502) 910-5976
-            </motion.a>
-            <motion.a
-              href="tel:+15026748851"
-              whileHover={{ scale: 1.04, y: -2 }}
-              whileTap={{ scale: 0.97 }}
-              className="rounded-full border border-stone-500/60 px-6 py-3.5 font-display text-base font-bold text-stone-200 transition-colors hover:border-gold-500 hover:text-gold-400"
-            >
-              Call Tony (502) 674-8851
             </motion.a>
           </div>
 
@@ -186,31 +186,6 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-        </div>
-
-        {/* Featured card: a real KAT job, not a placeholder */}
-        <div className="w-full max-w-sm">
-          <div className="rounded-2xl border border-stone-500/40 bg-navy-950/70 p-5 backdrop-blur-sm">
-            <p className="font-display text-[11px] font-bold tracking-[0.14em] text-stone-400 uppercase">
-              Recent work
-            </p>
-            <div className="mt-4 overflow-hidden rounded-xl">
-              <Image
-                src={asset("/images/kitchen-after.jpg")}
-                alt="Finished open-concept kitchen with exposed wood beam and pass-through counter"
-                width={640}
-                height={480}
-                priority
-                className="aspect-video w-full object-cover"
-              />
-            </div>
-            <div className="mt-4 flex items-baseline justify-between gap-4">
-              <p className="font-display text-lg font-bold text-white">
-                Open-concept kitchen
-              </p>
-              <p className="text-sm whitespace-nowrap text-stone-400">Louisville, KY</p>
-            </div>
-          </div>
         </div>
       </motion.div>
     </section>

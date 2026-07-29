@@ -1,135 +1,68 @@
-"use client";
-
-import { useState } from "react";
-import Image from "next/image";
-import { motion } from "framer-motion";
-import { asset } from "@/lib/asset";
-import Lightbox, { ExpandIcon, type LightboxImage } from "./Lightbox";
 import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
 import SectionHeading from "./SectionHeading";
 
-type Service = {
-  title: string;
-  description: string;
-  image: string;
-  alt: string;
-  /** Tailwind object-position override for tricky crops. */
-  imageClass?: string;
-};
-
-// Every card is a real KAT job photo — the work sells itself.
-const SERVICES: Service[] = [
-  {
-    title: "Bathroom remodels",
-    description:
-      "Vanities, tubs, tile, lighting, floors. Partial refreshes or the whole room, finished down to the caulk lines.",
-    image: "/images/bathroom-remodel-gold.jpg",
-    alt: "Remodeled bathroom with sage green walls, dark wood vanity, and gold fixtures",
-  },
-  {
-    title: "Kitchens & wall removal",
-    description:
-      "Open up the floor plan, set the beam, and rebuild the space, with structure and finish work handled by the same crew.",
-    image: "/images/wall-removal-during.jpg",
-    alt: "Load-bearing wall being removed and replaced with a beam between kitchen and living room",
-  },
-  {
-    title: "Tile & showers",
-    description:
-      "Tub surrounds, custom niches, and floors, laid out square and grouted clean.",
-    image: "/images/tile-shower.jpg",
-    alt: "New white tile tub surround with two inlaid mosaic niches",
-  },
-  {
-    title: "Flooring",
-    description:
-      "Luxury vinyl plank, laminate, and more. Old floors out, subfloor squared away, new floors laid straight.",
-    image: "/images/flooring-install.jpg",
-    alt: "Luxury vinyl plank flooring being installed across a kitchen",
-  },
-  {
-    title: "Trim & accent walls",
-    description:
-      "Picture-frame molding, wainscoting, tongue-and-groove ceilings. The details that make a room feel finished.",
-    image: "/images/accent-wall.jpg",
-    alt: "Painted accent wall with picture-frame trim molding",
-  },
-  {
-    title: "Sheds & outbuildings",
-    description:
-      "Repairs, rebuilds, and full makeovers: framing, siding, roofing, paint, even power and AC if you want it.",
-    image: "/images/shed-side-after.jpg",
-    alt: "Rebuilt shed with white siding, black metal wainscot, and a window AC unit",
-    imageClass: "object-[center_42%]",
-  },
+const SERVICES = [
+  "Handyman",
+  "Minor plumbing & electrical",
+  "Carpentry",
+  "Repair",
+  "Remodel",
+  "Flooring",
+  "Paint",
+  "Decks",
+  "Demolition",
 ];
 
-export default function Services() {
-  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
-
+function CheckIcon() {
   return (
-    <section id="services" className="relative bg-paper py-24 sm:py-32">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 16 16"
+      fill="none"
+      aria-hidden="true"
+      className="shrink-0"
+    >
+      <circle cx="8" cy="8" r="8" className="fill-gold-500/20" />
+      <path
+        d="M4.5 8.2 7 10.7l4.5-5.4"
+        className="stroke-gold-600"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export default function Services() {
+  return (
+    <section id="services" className="relative bg-paper pt-24 pb-4 sm:pt-32">
       <SawEdge fill="var(--color-paper)" className="absolute inset-x-0 -top-4" />
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
           align="left"
           eyebrow="Services"
-          title="One crew,"
-          titleMuted="the whole job."
-          intro="These are the jobs Louisville calls us for most. If yours isn't pictured, ask anyway. Between Alex and Tony, it's probably covered."
+          title="If yours isn't listed,"
+          titleMuted="ask anyway."
+          intro="Big or small, inside or out, this is the work we take on every week."
         />
 
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {SERVICES.map((service, i) => (
-            // Staggered delay = cards cascade in as the grid scrolls into view
-            <Reveal key={service.title} delay={i * 0.08}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                transition={{ type: "spring", stiffness: 300, damping: 22 }}
-                className="group h-full overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl hover:shadow-navy-800/8"
+        <Reveal className="mt-12">
+          <ul className="grid gap-x-8 gap-y-5 sm:grid-cols-2 lg:grid-cols-3">
+            {SERVICES.map((service) => (
+              <li
+                key={service}
+                className="flex items-center gap-3 border-b border-stone-200 pb-4 font-display text-xl font-bold text-navy-800"
               >
-                <button
-                  type="button"
-                  onClick={() =>
-                    setLightbox({
-                      src: service.image,
-                      alt: service.alt,
-                      title: service.title,
-                    })
-                  }
-                  aria-label={`Enlarge photo: ${service.alt}`}
-                  className="group/photo relative block w-full cursor-zoom-in overflow-hidden"
-                >
-                  <Image
-                    src={asset(service.image)}
-                    alt={service.alt}
-                    width={640}
-                    height={400}
-                    className={`aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] ${service.imageClass ?? ""}`}
-                  />
-                  <span className="absolute top-3 right-3 rounded-full bg-navy-950/80 px-2.5 py-1 text-xs font-semibold text-gold-500 backdrop-blur-sm">
-                    0{i + 1}
-                  </span>
-                  <span className="absolute right-3 bottom-3 flex h-7 w-7 items-center justify-center rounded-full bg-navy-950/80 text-stone-300 backdrop-blur-sm transition-colors group-hover/photo:text-gold-400">
-                    <ExpandIcon />
-                  </span>
-                </button>
-                <div className="p-6">
-                  <h3 className="font-display text-xl font-bold text-navy-800">
-                    {service.title}
-                  </h3>
-                  <p className="mt-2.5 leading-relaxed text-stone-600">
-                    {service.description}
-                  </p>
-                </div>
-              </motion.div>
-            </Reveal>
-          ))}
-        </div>
+                <CheckIcon />
+                {service}
+              </li>
+            ))}
+          </ul>
+        </Reveal>
       </div>
-
-      <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
     </section>
   );
 }

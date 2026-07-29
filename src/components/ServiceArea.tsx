@@ -4,19 +4,15 @@ import { motion } from "framer-motion";
 import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
 
-const NEIGHBORHOODS = [
-  "The Highlands",
-  "St. Matthews",
-  "Jeffersontown",
-  "Middletown",
-  "Fern Creek",
-  "Highview",
-  "Okolona",
-  "Shively",
-  "Pleasure Ridge Park",
-  "Valley Station",
-  "Prospect",
-  "Crescent Hill",
+const AREAS = [
+  "Bardstown",
+  "Mt. Washington",
+  "Shepherdsville",
+  "Taylorsville",
+  "Nelson County",
+  "Bullitt County",
+  "Spencer County",
+  "Louisville area",
 ];
 
 function PhoneIcon() {
@@ -33,6 +29,20 @@ function PhoneIcon() {
       aria-hidden="true"
     >
       <path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.4 2.1L8.1 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.6 2z" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="M13.5 21.9v-7.4h2.5l.5-3.1h-3V9.5c0-.9.3-1.6 1.6-1.6h1.5V5.1c-.3 0-1.2-.1-2.2-.1-2.3 0-3.8 1.4-3.8 3.9v2.5H8.1v3.1h2.5v7.4a10 10 0 0 0 2.9 0z" />
     </svg>
   );
 }
@@ -60,21 +70,6 @@ export default function ServiceArea() {
 
             <div className="mt-8 space-y-4">
               <motion.a
-                href="tel:+15029105976"
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center justify-between gap-3 rounded-2xl bg-gold-500 px-6 py-4 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
-              >
-                <span className="flex items-center gap-3 font-display text-lg font-bold text-navy-950">
-                  <PhoneIcon />
-                  (502) 910-5976
-                </span>
-                <span className="text-xs font-bold tracking-[0.14em] text-navy-800 uppercase">
-                  Alex
-                </span>
-              </motion.a>
-
-              <motion.a
                 href="tel:+15026748851"
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.97 }}
@@ -89,11 +84,36 @@ export default function ServiceArea() {
                 </span>
               </motion.a>
 
+              <motion.a
+                href="tel:+15029105976"
+                whileHover={{ scale: 1.02, y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="flex items-center justify-between gap-3 rounded-2xl bg-gold-500 px-6 py-4 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
+              >
+                <span className="flex items-center gap-3 font-display text-lg font-bold text-navy-950">
+                  <PhoneIcon />
+                  (502) 910-5976
+                </span>
+                <span className="text-xs font-bold tracking-[0.14em] text-navy-800 uppercase">
+                  Alex
+                </span>
+              </motion.a>
+
               <a
                 href="mailto:Info@KATHomeServices.com"
                 className="block rounded-2xl border border-stone-600/50 px-6 py-4 text-center font-medium text-stone-200 transition-colors hover:border-stone-400 hover:text-white"
               >
                 Info@KATHomeServices.com
+              </a>
+
+              <a
+                href="https://www.facebook.com/KAThomeservices"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2.5 rounded-2xl border border-stone-600/50 px-6 py-4 font-medium text-stone-200 transition-colors hover:border-stone-400 hover:text-white"
+              >
+                <FacebookIcon />
+                Find us on Facebook
               </a>
             </div>
 
@@ -108,21 +128,23 @@ export default function ServiceArea() {
             Service area
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-navy-800 sm:text-4xl lg:text-5xl">
-            Louisville based, Louisville proud
+            Based in Bardstown,{" "}
+            <span className="text-stone-500">serving up toward Louisville.</span>
           </h2>
           <p className="mt-5 max-w-lg text-lg leading-relaxed text-stone-600">
-            We work all over Louisville and the surrounding area. Not sure
-            if you&rsquo;re in range? Call anyway. Worst case, we point you
-            to somebody good.
+            We work out of Bardstown and cover the surrounding area: Nelson,
+            Bullitt, and Spencer Counties and on up toward Louisville. Not sure
+            if you&rsquo;re in range? Call anyway. Worst case, we point you to
+            somebody good.
           </p>
 
           <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-2">
-            {NEIGHBORHOODS.map((hood) => (
+            {AREAS.map((area) => (
               <li
-                key={hood}
+                key={area}
                 className="rounded-md bg-stone-200/60 px-3 py-1.5 text-sm font-medium text-stone-600"
               >
-                {hood}
+                {area}
               </li>
             ))}
           </ul>

@@ -17,13 +17,13 @@ const publicSans = Public_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://kathomeservices.com"),
-  title: "KAT Home Services, LLC | Home Repair & Remodeling in Louisville, KY",
+  title: "KAT Home Services, LLC | Home Repair & Remodeling in Bardstown, KY",
   description:
-    "Fully insured home repair and remodeling in Louisville, KY. Bathrooms, kitchens, flooring, tile, trim, and more. Call or text Alex (502) 910-5976 or Tony (502) 674-8851 for a free estimate.",
+    "Fully insured home repair and remodeling based in Bardstown, KY, serving Nelson, Bullitt, and Spencer Counties and up toward Louisville. Handyman work, remodels, demolition and cleanup. Call or text Tony (502) 674-8851 or Alex (502) 910-5976 for a free estimate.",
   openGraph: {
     title: "KAT Home Services, LLC",
     description:
-      "Fully insured home repair and remodeling in Louisville, KY. Free estimates. Call or text.",
+      "Fully insured home repair and remodeling based in Bardstown, KY, serving the surrounding area up toward Louisville. Free estimates. Call or text.",
     url: "https://kathomeservices.com",
     siteName: "KAT Home Services, LLC",
     images: [{ url: "/images/og.jpg", width: 1200, height: 630 }],

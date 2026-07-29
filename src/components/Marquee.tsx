@@ -1,12 +1,12 @@
 const TRADES = [
-  "Bathrooms",
-  "Kitchens",
-  "Tile",
+  "Handyman",
+  "Carpentry",
+  "Repairs",
+  "Remodels",
   "Flooring",
-  "Trim",
-  "Drywall",
   "Paint",
-  "Sheds",
+  "Decks",
+  "Demolition",
 ];
 
 function Row({ idPrefix }: { idPrefix: string }) {
