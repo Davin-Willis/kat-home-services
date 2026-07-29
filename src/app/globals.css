@@ -9,11 +9,14 @@
   for supporting text and borders on both dark and light sections.
 */
 @theme {
-  /* Near-black navy base, from the logo's shield */
-  --color-navy-950: #080d16;
-  --color-navy-900: #0c1320;
-  --color-navy-800: #101a2b; /* brand base */
-  --color-navy-700: #1b2942;
+  /* Rich warm-black base matching the logo's near-black background.
+     (Client direction: "less blue, all black". The navy-* token names are
+     kept so no component classes change, but the values are now warm
+     blacks with a faint gold undertone rather than blues.) */
+  --color-navy-950: #0a0806;
+  --color-navy-900: #0f0d0a;
+  --color-navy-800: #14110d; /* brand base */
+  --color-navy-700: #2a2418;
 
   /* Warm stone neutrals */
   --color-stone-600: #57503f;
