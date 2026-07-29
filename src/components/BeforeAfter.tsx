@@ -31,6 +31,11 @@ const JOBS: Job[] = [
         label: "Before",
       },
       {
+        src: "/images/living-room-before.jpg",
+        alt: "Carpeted living room before renovation, walled off from the kitchen",
+        label: "Before",
+      },
+      {
         src: "/images/wall-removal-during.jpg",
         alt: "Load-bearing wall being removed and replaced with a beam between kitchen and living room",
         label: "During",
@@ -55,8 +60,18 @@ const JOBS: Job[] = [
   {
     title: "Two full bathroom remodels",
     description:
-      "New vanities, quartz tops, mirrors, lighting, hardware, tile, and flooring. Two dated bathrooms in the same house, each with its own look.",
+      "Two dated builder-grade bathrooms in the same house, gutted and redone: new vanities, quartz tops, mirrors, lighting, hardware, tile, and flooring, each with its own look.",
     images: [
+      {
+        src: "/images/bathroom-before-1.jpg",
+        alt: "Dated bathroom before remodel with beige tub surround and oak vanity",
+        label: "Before",
+      },
+      {
+        src: "/images/bathroom-before-2.jpg",
+        alt: "Dated bathroom before remodel with vinyl floor and oak vanity",
+        label: "Before",
+      },
       {
         src: "/images/tile-shower.jpg",
         alt: "New white tile tub surround with two inlaid mosaic niches",
@@ -77,7 +92,7 @@ const JOBS: Job[] = [
   {
     title: "Backyard shed rebuild",
     description:
-      "Weathered shed rebuilt from the runners up: new framing, siding, and paint, plus insulation, power, a light, and a window AC inside.",
+      "The full teardown-to-done: a weathered shed lifted onto a new pressure-treated frame, stripped and reframed, insulated and wired with power, a light, heat, and a window AC, then finished in fresh paint with new siding, doors, a window, and an exterior light.",
     images: [
       {
         src: "/images/shed-before.jpg",
@@ -85,20 +100,35 @@ const JOBS: Job[] = [
         label: "Before",
       },
       {
+        src: "/images/shed-demo.jpg",
+        alt: "Shed lifted onto a new pressure-treated frame with old siding coming off",
+        label: "During",
+      },
+      {
+        src: "/images/shed-framing.jpg",
+        alt: "Shed interior stripped to bare framing with new roof structure",
+        label: "Framing",
+      },
+      {
+        src: "/images/shed-insulation.jpg",
+        alt: "Shed interior with insulation, wiring, ceiling fan light, heater, and window AC installed",
+        label: "Insulation",
+      },
+      {
         src: "/images/shed-after.jpg",
-        alt: "Rebuilt shed with fresh white siding and black trim",
-        label: "After",
+        alt: "Rebuilt shed with fresh white siding, black trim, new doors, and exterior light",
+        label: "Finished",
       },
       {
         src: "/images/shed-side-after.jpg",
         alt: "Side view of the rebuilt shed with white siding, black metal wainscot, and a window AC unit",
-        label: "After",
+        label: "Finished",
       },
     ],
   },
 ];
 
-// Detail jobs with a single photo so far; shown smaller, side by side.
+// Smaller detail jobs, shown side by side.
 const DETAIL_JOBS: Job[] = [
   {
     title: "Tongue-and-groove pine ceiling",
@@ -110,17 +140,27 @@ const DETAIL_JOBS: Job[] = [
         alt: "Vaulted tongue-and-groove pine ceiling with recessed lighting over a kitchen",
         label: "Finished",
       },
+      {
+        src: "/images/pine-ceiling-2.jpg",
+        alt: "Second angle of the vaulted pine ceiling with pendant light over the kitchen",
+        label: "Finished",
+      },
     ],
   },
   {
     title: "Picture-frame accent wall",
     description:
-      "Trim built out, caulked, and painted for a feature wall.",
+      "Trim laid out and built piece by piece, then caulked and painted for a feature wall.",
     images: [
+      {
+        src: "/images/accent-wall-trim.jpg",
+        alt: "Picture-frame trim installed on the wall before paint",
+        label: "Trim up",
+      },
       {
         src: "/images/accent-wall.jpg",
         alt: "Painted accent wall with picture-frame trim molding",
-        label: "In progress",
+        label: "Painted",
       },
     ],
   },
@@ -205,9 +245,9 @@ export default function BeforeAfter() {
                       image={image}
                       jobTitle={job.title}
                       aspect={
-                        // In a 5-photo collage the last tile stretches to
-                        // fill the row on small screens.
-                        job.images.length > 3 && j === job.images.length - 1
+                        // With an odd photo count the last tile stretches to
+                        // fill its row on small screens.
+                        job.images.length % 2 === 1 && j === job.images.length - 1
                           ? "aspect-[4/3] max-sm:col-span-2 max-sm:aspect-[8/3]"
                           : "aspect-[4/3]"
                       }
@@ -236,13 +276,16 @@ export default function BeforeAfter() {
                       {job.description}
                     </p>
                   </div>
-                  <div className="mt-auto">
-                    <JobPhoto
-                      image={job.images[0]}
-                      jobTitle={job.title}
-                      aspect="aspect-[16/10]"
-                      onOpen={setLightbox}
-                    />
+                  <div className="mt-auto grid grid-cols-2 gap-2">
+                    {job.images.map((image) => (
+                      <JobPhoto
+                        key={image.src}
+                        image={image}
+                        jobTitle={job.title}
+                        aspect="aspect-[4/3]"
+                        onOpen={setLightbox}
+                      />
+                    ))}
                   </div>
                 </motion.article>
               </Reveal>
