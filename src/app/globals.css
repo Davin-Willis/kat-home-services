@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+/*
+  Tailwind v4 design tokens. Every --color-* here becomes a utility class:
+  --color-navy-800 → bg-navy-800, text-navy-800, border-navy-800, etc.
+
+  Palette is pulled from the KAT Home Services bobcat logo: near-black navy,
+  metallic tan-gold, and warm cream. The "stone" ramp is a warm neutral used
+  for supporting text and borders on both dark and light sections.
+*/
+@theme {
+  /* Near-black navy base, from the logo's shield */
+  --color-navy-950: #080d16;
+  --color-navy-900: #0c1320;
+  --color-navy-800: #101a2b; /* brand base */
+  --color-navy-700: #1b2942;
+
+  /* Warm stone neutrals */
+  --color-stone-600: #57503f;
+  --color-stone-500: #6f6754;
+  --color-stone-400: #948b76;
+  --color-stone-300: #c3bca9;
+  --color-stone-200: #e5dfd0;
+
+  /* Metallic gold, from the logo lettering */
+  --color-gold-400: #d9b878;
+  --color-gold-500: #c39a55; /* brand accent */
+  --color-gold-600: #9c7838;
+
+  /* Cream for light sections, from the logo's cream outlines */
+  --color-paper: #f6f1e4;
+}
+
+/* Fonts come from next/font as CSS variables, so reference them with @theme inline */
+@theme inline {
+  --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bitter), ui-serif, Georgia, serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+/* Infinite marquee: content is rendered twice, so -50% loops seamlessly */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}
+
+html {
+  /* Smooth anchor scrolling for the header nav links… */
+  scroll-behavior: smooth;
+  /* …and stop targets from hiding under the sticky header */
+  scroll-padding-top: 5rem;
+}
+
+/* Users who ask for reduced motion get instant jumps instead */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+::selection {
+  background: var(--color-gold-500);
+  color: var(--color-navy-950);
+}
