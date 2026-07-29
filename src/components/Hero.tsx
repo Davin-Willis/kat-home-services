@@ -2,26 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
-import {
-  motion,
-  useReducedMotion,
-  useScroll,
-  useTransform,
-  type Variants,
-} from "framer-motion";
-import { EASE } from "./Reveal";
-
-// Parent/child variants: the parent orchestrates timing (stagger), each
-// child defines its own rise-and-fade.
-const stagger: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.09, delayChildren: 0.15 } },
-};
-
-const rise: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: EASE } },
-};
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 
 const TRUST_BADGES = ["Fully insured", "Free estimates", "Louisville owned"];
 
@@ -40,23 +21,12 @@ function CheckIcon() {
   );
 }
 
-/** Word-by-word stagger for one headline line. */
-function Line({ words, accent }: { words: string[]; accent?: string }) {
-  return (
-    <>
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          variants={rise}
-          className={`mr-[0.22em] inline-block ${word === accent ? "text-gold-500" : ""}`}
-        >
-          {word}
-        </motion.span>
-      ))}
-    </>
-  );
-}
-
+/**
+ * The hero renders fully visible in the server HTML — no entrance animation
+ * gates it, so the headline and call buttons are on screen from the first
+ * paint even before JavaScript loads. The only motion is the scroll-out
+ * parallax, which starts from the resting position.
+ */
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
   const prefersReduced = useReducedMotion();
@@ -110,15 +80,12 @@ export default function Hero() {
       {/* Top band: the bobcat is the brand centerpiece — it shares the
           stage with the headline instead of hiding in a corner. */}
       <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="show"
         style={prefersReduced ? undefined : { opacity: fade }}
         className="flex flex-col gap-10 md:flex-row md:items-center md:justify-between md:gap-14"
       >
         <div className="min-w-0">
           {/* Mobile: logo front and center above the headline */}
-          <motion.div variants={rise} className="mb-8 flex justify-center md:hidden">
+          <div className="mb-8 flex justify-center md:hidden">
             <Image
               src="/images/kat-logo.png"
               alt="KAT Home Services bobcat logo"
@@ -127,37 +94,30 @@ export default function Hero() {
               priority
               className="w-44 drop-shadow-[0_10px_30px_rgba(195,154,85,0.25)]"
             />
-          </motion.div>
+          </div>
 
-          <motion.p
-            variants={rise}
-            className="mb-8 font-mono text-xs font-bold tracking-[0.25em] text-stone-300 uppercase"
-          >
-            <span aria-hidden="true" className="text-gold-500">
-              ■{" "}
-            </span>
+          <p className="mb-8 font-display text-sm font-bold tracking-[0.14em] text-gold-500 uppercase">
             Home repair &amp; remodeling · Louisville, KY
-          </motion.p>
+          </p>
 
           <h1 className="font-display font-bold tracking-tight text-white">
             <motion.span
               style={prefersReduced ? undefined : { y: line1Y }}
               className="block text-[11vw] leading-[0.95] sm:text-[9vw] md:text-[8vw]"
             >
-              <Line words={["Small", "fixes."]} />
+              Small fixes.
             </motion.span>
             <motion.span
               style={prefersReduced ? undefined : { y: line2Y }}
               className="block pl-[6vw] text-[11vw] leading-[0.95] sm:text-[9vw] md:pl-[10vw] md:text-[8vw]"
             >
-              <Line words={["Full", "remodels."]} accent="remodels." />
+              Full <span className="text-gold-500">remodels.</span>
             </motion.span>
           </h1>
         </div>
 
         {/* Desktop: big bobcat riding shotgun with the headline */}
         <motion.div
-          variants={rise}
           style={prefersReduced ? undefined : { y: logoY }}
           className="hidden shrink-0 md:block"
         >
@@ -174,42 +134,47 @@ export default function Hero() {
 
       {/* Bottom band: copy + CTAs bottom-left, featured project bottom-right */}
       <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="show"
         style={prefersReduced ? undefined : { y: bottomY, opacity: fade }}
         className="mt-16 flex flex-wrap items-end justify-between gap-x-16 gap-y-10"
       >
-        <motion.div variants={rise} className="max-w-md">
+        <div className="max-w-md">
           <p className="text-lg leading-relaxed text-stone-300">
-            KAT Home Services is Alex and Tony — a Louisville crew that handles
+            KAT Home Services is Alex and Tony, a Louisville crew that handles
             bathrooms, kitchens, flooring, trim, and the rest of the list.
-            Straight prices, clean work, and owners who answer their own
+            Clean work at a fair price, from owners who answer their own
             phones.
           </p>
 
-          <div className="mt-7 flex flex-wrap items-center gap-6">
+          <div className="mt-7 flex flex-wrap items-center gap-4">
             <motion.a
               href="tel:+15029105976"
               whileHover={{ scale: 1.04, y: -2 }}
               whileTap={{ scale: 0.97 }}
-              className="rounded-full bg-gold-500 px-7 py-3.5 font-display text-base font-bold text-navy-950 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
+              className="rounded-full bg-gold-500 px-6 py-3.5 font-display text-base font-bold text-navy-950 shadow-lg shadow-gold-500/25 transition-colors hover:bg-gold-400"
             >
-              Call (502) 910-5976
+              Call Alex (502) 910-5976
             </motion.a>
-            <a
-              href="#services"
-              className="group font-mono text-sm tracking-wider text-stone-300 uppercase transition-colors hover:text-gold-500"
+            <motion.a
+              href="tel:+15026745581"
+              whileHover={{ scale: 1.04, y: -2 }}
+              whileTap={{ scale: 0.97 }}
+              className="rounded-full border border-stone-500/60 px-6 py-3.5 font-display text-base font-bold text-stone-200 transition-colors hover:border-gold-500 hover:text-gold-400"
             >
-              [ See our services{" "}
-              <span className="inline-block transition-transform group-hover:translate-x-1">
-                →
-              </span>{" "}
-              ]
-            </a>
+              Call Tony (502) 674-5581
+            </motion.a>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-x-7 gap-y-3">
+          <a
+            href="#services"
+            className="group mt-6 inline-block text-base font-medium text-stone-300 transition-colors hover:text-gold-400"
+          >
+            See our services{" "}
+            <span className="inline-block transition-transform group-hover:translate-x-1">
+              →
+            </span>
+          </a>
+
+          <ul className="mt-7 flex flex-wrap gap-x-7 gap-y-3">
             {TRUST_BADGES.map((badge) => (
               <li
                 key={badge}
@@ -220,20 +185,13 @@ export default function Hero() {
               </li>
             ))}
           </ul>
-
-          <p
-            aria-hidden="true"
-            className="mt-12 font-mono text-xs tracking-[0.25em] text-stone-400 uppercase"
-          >
-            [ Scroll ↓ ]
-          </p>
-        </motion.div>
+        </div>
 
         {/* Featured card: a real KAT job, not a placeholder */}
-        <motion.div variants={rise} className="w-full max-w-sm">
+        <div className="w-full max-w-sm">
           <div className="rounded-2xl border border-stone-500/40 bg-navy-950/70 p-5 backdrop-blur-sm">
-            <p className="font-mono text-[10px] tracking-[0.25em] text-stone-400 uppercase">
-              ■ Recent work
+            <p className="font-display text-[11px] font-bold tracking-[0.14em] text-stone-400 uppercase">
+              Recent work
             </p>
             <div className="mt-4 overflow-hidden rounded-xl">
               <Image
@@ -252,7 +210,7 @@ export default function Hero() {
               <p className="text-sm whitespace-nowrap text-stone-400">Louisville, KY</p>
             </div>
           </div>
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   );

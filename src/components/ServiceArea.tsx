@@ -37,44 +37,25 @@ function PhoneIcon() {
   );
 }
 
+/**
+ * The contact card renders first in the DOM so every "Get a free estimate"
+ * link (#contact) lands with the phone numbers in view, on phones included.
+ * On large screens the card sits on the right, service area text on the left.
+ */
 export default function ServiceArea() {
   return (
     <section id="contact" className="relative bg-paper py-24 sm:py-32">
       <SawEdge fill="var(--color-paper)" className="absolute inset-x-0 -top-4" />
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2">
-        <Reveal>
-          <p className="font-mono text-xs font-bold tracking-[0.25em] text-gold-600 uppercase">
-            <span aria-hidden="true">■ </span>Service area
-          </p>
-          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-navy-800 sm:text-4xl lg:text-5xl">
-            Louisville based, Louisville proud
-          </h2>
-          <p className="mt-5 max-w-lg text-lg leading-relaxed text-stone-600">
-            We work all over Louisville and the surrounding area. Not sure
-            if you&rsquo;re in range? Call anyway — worst case, we point you
-            to somebody good.
-          </p>
-
-          <ul className="mt-8 flex flex-wrap gap-2.5">
-            {NEIGHBORHOODS.map((hood, i) => (
-              <Reveal key={hood} delay={i * 0.04}>
-                <li className="rounded-full border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-navy-800">
-                  {hood}
-                </li>
-              </Reveal>
-            ))}
-          </ul>
-        </Reveal>
-
+      <div className="mx-auto grid max-w-6xl items-start gap-14 px-5 sm:px-8 lg:grid-cols-2">
         {/* Contact card — the target of every "Get a free estimate" CTA */}
-        <Reveal delay={0.15}>
+        <Reveal className="lg:order-2">
           <div className="rounded-3xl bg-navy-800 p-8 shadow-2xl shadow-navy-800/25 sm:p-10">
             <h3 className="font-display text-2xl font-bold text-white">
               Get your free estimate
             </h3>
             <p className="mt-3 leading-relaxed text-stone-300">
               Fastest way: call or text photos of the job to either of us.
-              We&rsquo;ll get you a straight price.
+              We&rsquo;ll come back with a clear, written number.
             </p>
 
             <div className="mt-8 space-y-4">
@@ -88,7 +69,7 @@ export default function ServiceArea() {
                   <PhoneIcon />
                   (502) 910-5976
                 </span>
-                <span className="font-mono text-xs tracking-[0.2em] text-navy-800 uppercase">
+                <span className="text-xs font-bold tracking-[0.14em] text-navy-800 uppercase">
                   Alex
                 </span>
               </motion.a>
@@ -103,7 +84,7 @@ export default function ServiceArea() {
                   <PhoneIcon />
                   (502) 674-5581
                 </span>
-                <span className="font-mono text-xs tracking-[0.2em] text-navy-800 uppercase">
+                <span className="text-xs font-bold tracking-[0.14em] text-navy-800 uppercase">
                   Tony
                 </span>
               </motion.a>
@@ -120,6 +101,31 @@ export default function ServiceArea() {
               Fully insured · Free estimates, always
             </p>
           </div>
+        </Reveal>
+
+        <Reveal delay={0.1} className="lg:order-1">
+          <p className="font-display text-sm font-bold tracking-[0.14em] text-gold-600 uppercase">
+            Service area
+          </p>
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-navy-800 sm:text-4xl lg:text-5xl">
+            Louisville based, Louisville proud
+          </h2>
+          <p className="mt-5 max-w-lg text-lg leading-relaxed text-stone-600">
+            We work all over Louisville and the surrounding area. Not sure
+            if you&rsquo;re in range? Call anyway. Worst case, we point you
+            to somebody good.
+          </p>
+
+          <ul className="mt-8 flex flex-wrap gap-x-3 gap-y-2">
+            {NEIGHBORHOODS.map((hood) => (
+              <li
+                key={hood}
+                className="rounded-md bg-stone-200/60 px-3 py-1.5 text-sm font-medium text-stone-600"
+              >
+                {hood}
+              </li>
+            ))}
+          </ul>
         </Reveal>
       </div>
     </section>

@@ -35,7 +35,6 @@
 @theme inline {
   --font-sans: var(--font-public-sans), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-bitter), ui-serif, Georgia, serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 }
 
 /* Infinite marquee: content is rendered twice, so -50% loops seamlessly */

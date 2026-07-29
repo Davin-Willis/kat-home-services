@@ -7,7 +7,6 @@ import Process from "@/components/Process";
 import RecentWork from "@/components/RecentWork";
 import ServiceArea from "@/components/ServiceArea";
 import Footer from "@/components/Footer";
-import Ticker from "@/components/Ticker";
 
 /**
  * The "/" route. This stays a Server Component — it just composes the
@@ -26,7 +25,6 @@ export default function Home() {
         <ServiceArea />
       </main>
       <Footer />
-      <Ticker />
     </MotionProvider>
   );
 }

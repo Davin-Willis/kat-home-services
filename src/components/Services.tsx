@@ -11,6 +11,8 @@ type Service = {
   description: string;
   image: string;
   alt: string;
+  /** Tailwind object-position override for tricky crops. */
+  imageClass?: string;
 };
 
 // Every card is a real KAT job photo — the work sells itself.
@@ -18,44 +20,45 @@ const SERVICES: Service[] = [
   {
     title: "Bathroom remodels",
     description:
-      "Vanities, tubs, tile, lighting, floors — partial refreshes or the whole room, finished down to the caulk lines.",
+      "Vanities, tubs, tile, lighting, floors. Partial refreshes or the whole room, finished down to the caulk lines.",
     image: "/images/bathroom-remodel-gold.jpg",
     alt: "Remodeled bathroom with sage green walls, dark wood vanity, and gold fixtures",
   },
   {
     title: "Kitchens & wall removal",
     description:
-      "Open up the floor plan, set the beam, and rebuild the space — structure and finish work handled by the same crew.",
+      "Open up the floor plan, set the beam, and rebuild the space, with structure and finish work handled by the same crew.",
     image: "/images/wall-removal-during.jpg",
     alt: "Load-bearing wall being removed and replaced with a beam between kitchen and living room",
   },
   {
     title: "Tile & showers",
     description:
-      "Tub surrounds, custom niches, floors — laid out square, set level, and grouted clean.",
+      "Tub surrounds, custom niches, and floors, laid out square and grouted clean.",
     image: "/images/tile-shower.jpg",
     alt: "New white tile tub surround with two inlaid mosaic niches",
   },
   {
     title: "Flooring",
     description:
-      "Luxury vinyl plank, laminate, and more — old floors out, subfloor squared away, new floors laid straight.",
+      "Luxury vinyl plank, laminate, and more. Old floors out, subfloor squared away, new floors laid straight.",
     image: "/images/flooring-install.jpg",
     alt: "Luxury vinyl plank flooring being installed across a kitchen",
   },
   {
     title: "Trim & accent walls",
     description:
-      "Picture-frame molding, wainscoting, tongue-and-groove ceilings — the details that make a room feel finished.",
+      "Picture-frame molding, wainscoting, tongue-and-groove ceilings. The details that make a room feel finished.",
     image: "/images/accent-wall.jpg",
     alt: "Painted accent wall with picture-frame trim molding",
   },
   {
     title: "Sheds & outbuildings",
     description:
-      "Repairs, rebuilds, and full makeovers — framing, siding, roofing, paint, even power and AC if you want it.",
-    image: "/images/shed-after.jpg",
-    alt: "Backyard shed rebuilt with fresh white siding and black trim",
+      "Repairs, rebuilds, and full makeovers: framing, siding, roofing, paint, even power and AC if you want it.",
+    image: "/images/shed-side-after.jpg",
+    alt: "Rebuilt shed with white siding, black metal wainscot, and a window AC unit",
+    imageClass: "object-[center_42%]",
   },
 ];
 
@@ -69,7 +72,7 @@ export default function Services() {
           eyebrow="Services"
           title="One crew,"
           titleMuted="the whole job."
-          intro="These are the jobs Louisville calls us for most. If yours isn't pictured, ask anyway — between Alex and Tony, it's probably covered."
+          intro="These are the jobs Louisville calls us for most. If yours isn't pictured, ask anyway. Between Alex and Tony, it's probably covered."
         />
 
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -87,9 +90,9 @@ export default function Services() {
                     alt={service.alt}
                     width={640}
                     height={400}
-                    className="aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    className={`aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.04] ${service.imageClass ?? ""}`}
                   />
-                  <span className="absolute top-3 right-3 rounded-full bg-navy-950/80 px-2.5 py-1 font-mono text-xs text-gold-500 backdrop-blur-sm">
+                  <span className="absolute top-3 right-3 rounded-full bg-navy-950/80 px-2.5 py-1 text-xs font-semibold text-gold-500 backdrop-blur-sm">
                     0{i + 1}
                   </span>
                 </div>

@@ -11,7 +11,7 @@ type SectionHeadingProps = {
   align?: "center" | "left";
 };
 
-/** Consistent section opener: mono eyebrow, two-tone display title, optional intro. */
+/** Consistent section opener: small gold eyebrow, two-tone display title, optional intro. */
 export default function SectionHeading({
   eyebrow,
   title,
@@ -23,8 +23,11 @@ export default function SectionHeading({
   const centered = align === "center";
   return (
     <Reveal className={centered ? "mx-auto max-w-2xl text-center" : "max-w-3xl"}>
-      <p className="font-mono text-xs font-bold tracking-[0.25em] text-gold-500 uppercase">
-        <span aria-hidden="true">■ </span>
+      <p
+        className={`font-display text-sm font-bold tracking-[0.14em] uppercase ${
+          dark ? "text-gold-500" : "text-gold-600"
+        }`}
+      >
         {eyebrow}
       </p>
       <h2
@@ -34,7 +37,7 @@ export default function SectionHeading({
       >
         {title}
         {titleMuted && (
-          <span className={dark ? "text-stone-400" : "text-stone-300"}> {titleMuted}</span>
+          <span className={dark ? "text-stone-300" : "text-stone-500"}> {titleMuted}</span>
         )}
       </h2>
       {intro && (
