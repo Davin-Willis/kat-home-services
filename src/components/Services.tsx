@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Lightbox, { ExpandIcon, type LightboxImage } from "./Lightbox";
 import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
 import SectionHeading from "./SectionHeading";
@@ -63,6 +65,8 @@ const SERVICES: Service[] = [
 ];
 
 export default function Services() {
+  const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
+
   return (
     <section id="services" className="relative bg-paper py-24 sm:py-32">
       <SawEdge fill="var(--color-paper)" className="absolute inset-x-0 -top-4" />
@@ -84,7 +88,18 @@ export default function Services() {
                 transition={{ type: "spring", stiffness: 300, damping: 22 }}
                 className="group h-full overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition-shadow duration-300 hover:shadow-xl hover:shadow-navy-800/8"
               >
-                <div className="relative overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setLightbox({
+                      src: service.image,
+                      alt: service.alt,
+                      title: service.title,
+                    })
+                  }
+                  aria-label={`Enlarge photo: ${service.alt}`}
+                  className="group/photo relative block w-full cursor-zoom-in overflow-hidden"
+                >
                   <Image
                     src={service.image}
                     alt={service.alt}
@@ -95,7 +110,10 @@ export default function Services() {
                   <span className="absolute top-3 right-3 rounded-full bg-navy-950/80 px-2.5 py-1 text-xs font-semibold text-gold-500 backdrop-blur-sm">
                     0{i + 1}
                   </span>
-                </div>
+                  <span className="absolute right-3 bottom-3 flex h-7 w-7 items-center justify-center rounded-full bg-navy-950/80 text-stone-300 backdrop-blur-sm transition-colors group-hover/photo:text-gold-400">
+                    <ExpandIcon />
+                  </span>
+                </button>
                 <div className="p-6">
                   <h3 className="font-display text-xl font-bold text-navy-800">
                     {service.title}
@@ -109,6 +127,8 @@ export default function Services() {
           ))}
         </div>
       </div>
+
+      <Lightbox image={lightbox} onClose={() => setLightbox(null)} />
     </section>
   );
 }

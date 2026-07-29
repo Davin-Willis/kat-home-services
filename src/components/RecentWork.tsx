@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
-import Reveal, { EASE } from "./Reveal";
+import { motion } from "framer-motion";
+import Lightbox, { ExpandIcon, type LightboxImage } from "./Lightbox";
+import Reveal from "./Reveal";
 import SawEdge from "./SawEdge";
 import SectionHeading from "./SectionHeading";
 
@@ -14,8 +15,6 @@ type Project = {
   description: string;
   images: ProjectImage[];
 };
-
-type LightboxImage = ProjectImage & { projectTitle: string };
 
 // Real KAT projects, shown honestly: befores next to afters.
 const PROJECTS: Project[] = [
@@ -84,94 +83,6 @@ const PROJECTS: Project[] = [
   },
 ];
 
-function ExpandIcon() {
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-    </svg>
-  );
-}
-
-/** Full-screen viewer so the work is actually inspectable, not thumbnail-sized. */
-function Lightbox({
-  image,
-  onClose,
-}: {
-  image: LightboxImage | null;
-  onClose: () => void;
-}) {
-  useEffect(() => {
-    if (!image) return;
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") onClose();
-    };
-    window.addEventListener("keydown", onKeyDown);
-    document.documentElement.style.overflow = "hidden";
-    return () => {
-      window.removeEventListener("keydown", onKeyDown);
-      document.documentElement.style.overflow = "";
-    };
-  }, [image, onClose]);
-
-  return (
-    <AnimatePresence>
-      {image && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.25, ease: EASE }}
-          onClick={onClose}
-          className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-navy-950/95 p-4 backdrop-blur-sm sm:p-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${image.projectTitle}: ${image.label}`}
-        >
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close photo"
-            className="absolute top-4 right-4 flex h-11 w-11 items-center justify-center rounded-full border border-stone-500/50 text-2xl leading-none text-stone-200 transition-colors hover:border-gold-500 hover:text-gold-400"
-          >
-            ×
-          </button>
-          <motion.div
-            initial={{ scale: 0.96, y: 12 }}
-            animate={{ scale: 1, y: 0 }}
-            exit={{ scale: 0.96, y: 12 }}
-            transition={{ duration: 0.25, ease: EASE }}
-            onClick={(event) => event.stopPropagation()}
-            className="flex max-h-full flex-col items-center"
-          >
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={1600}
-              height={1200}
-              className="h-auto max-h-[80vh] w-auto max-w-full rounded-xl object-contain"
-            />
-            <p className="mt-4 text-center text-sm text-stone-300">
-              <span className="font-bold text-gold-500 uppercase">{image.label}</span>
-              <span className="mx-2 text-stone-500">·</span>
-              {image.projectTitle}
-            </p>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  );
-}
-
 export default function RecentWork() {
   const [lightbox, setLightbox] = useState<LightboxImage | null>(null);
 
@@ -204,7 +115,7 @@ export default function RecentWork() {
                       key={image.src}
                       type="button"
                       onClick={() =>
-                        setLightbox({ ...image, projectTitle: project.title })
+                        setLightbox({ ...image, title: project.title })
                       }
                       aria-label={`Enlarge photo: ${image.alt}`}
                       className="group/photo relative block cursor-zoom-in"
